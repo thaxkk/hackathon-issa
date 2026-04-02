@@ -14,12 +14,6 @@ Next.js frontend for the Issa Compass AI assistant console.
 # Install dependencies
 npm install
 
-# Copy env file
-cp .env.example .env.local
-
-# Fill in your Railway backend URL
-# NEXT_PUBLIC_API_URL=https://your-app.up.railway.app
-
 # Run dev server
 npm run dev
 ```

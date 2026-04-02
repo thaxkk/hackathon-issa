@@ -7,7 +7,7 @@ interface Message {
   id: string
   role: 'client' | 'ai'
   text: string
-  timestamp: Date
+  timestamp: string // ISO string
 }
 
 export default function ChatTab() {
@@ -16,7 +16,7 @@ export default function ChatTab() {
       id: '0',
       role: 'ai',
       text: "Sawadee ka! 🙏 I'm your Issa Compass assistant. Ask me anything about the DTV visa — I'm here to help you make Thailand home.",
-      timestamp: new Date(),
+      timestamp: new Date().toISOString(),
     }
   ])
   const [input, setInput] = useState('')
@@ -37,7 +37,7 @@ export default function ChatTab() {
       id: Date.now().toString(),
       role: 'client',
       text,
-      timestamp: new Date(),
+      timestamp: new Date().toISOString(),
     }
 
     setMessages(prev => [...prev, clientMsg])
@@ -52,7 +52,7 @@ export default function ChatTab() {
         id: (Date.now() + 1).toString(),
         role: 'ai',
         text: aiText,
-        timestamp: new Date(),
+        timestamp: new Date().toISOString(),
       }])
 
       setChatHistory(prev => [
@@ -65,7 +65,7 @@ export default function ChatTab() {
         id: (Date.now() + 1).toString(),
         role: 'ai',
         text: '⚠️ Could not connect to the server. Check your API URL.',
-        timestamp: new Date(),
+        timestamp: new Date().toISOString(),
       }])
     } finally {
       setIsTyping(false)
@@ -91,13 +91,15 @@ export default function ChatTab() {
       id: '0',
       role: 'ai',
       text: "Sawadee ka! 🙏 I'm your Issa Compass assistant. Ask me anything about the DTV visa — I'm here to help you make Thailand home.",
-      timestamp: new Date(),
+      timestamp: new Date().toISOString(),
     }])
     setChatHistory([])
   }
 
-  const formatTime = (d: Date) =>
-    d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+  const formatTime = (timestamp: string) => {
+    const d = new Date(timestamp)
+    return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+  }
 
   return (
     <div className="flex flex-col h-[calc(100vh-73px)]">
