@@ -98,7 +98,8 @@ export default function ChatTab() {
 
   const formatTime = (timestamp: string) => {
     const d = new Date(timestamp)
-    return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    // Use fixed locale and 24-hour format to avoid hydration mismatch
+    return d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', hour12: false })
   }
 
   return (
