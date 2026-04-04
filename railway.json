@@ -1,1 +1,7 @@
-{"deploy":{"startCommand":"node server.js"}}
+{
+  "deploy": {
+    "startCommand": "node server.js",
+    "healthcheckPath": "/",
+    "healthcheckTimeout": 30
+  }
+}
